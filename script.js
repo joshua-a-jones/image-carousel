@@ -2,7 +2,8 @@ const track = document.getElementById('carousel-track');
 const slides = document.getElementsByClassName('carousel-slide');
 const nextBtn = document.getElementById('next-button');
 const previousBtn = document.getElementById('previous-button');
-const navBtns = document.getElementsByClassName('carousel-nav-button');
+const navigation = document.getElementById('carousel-navigation');
+const navDots = document.getElementsByClassName('carousel-nav-button');
 
 
 
@@ -19,6 +20,7 @@ nextBtn.addEventListener('click', (e) => {
     const nextSlide = currentSlide.nextElementSibling;
     if (!nextSlide) {return;}
     const index = getIndexOfNodeElement(slides, currentSlide);
+    const nextIndex = getIndexOfNodeElement(slides,nextSlide);
 
     const shiftAmount = (index+1)*getImageWidth();
 
@@ -26,6 +28,7 @@ nextBtn.addEventListener('click', (e) => {
     
     currentSlide.classList.remove('current');
     nextSlide.classList.add('current');
+    setCurrentDot(nextIndex);
     
 });
 
@@ -35,17 +38,45 @@ previousBtn.addEventListener('click', (e) => {
     const nextSlide = currentSlide.previousElementSibling;
     if (!nextSlide) {return;}
     const index = getIndexOfNodeElement(slides, currentSlide);
-
+    const nextIndex = getIndexOfNodeElement(slides,nextSlide);
     const shiftAmount = (index-1)*getImageWidth() ;
 
     track.style.transform = `translateX(-${shiftAmount}px)`;
     
     currentSlide.classList.remove('current');
     nextSlide.classList.add('current');
-    
+    setCurrentDot(nextIndex);
 });
 
 
+// click a navigation dot at the bottom and jump to that slide
+for (let i = 0; i < navDots.length; i += 1) {
+    navDots[i].addEventListener('click', navigateToSlide);
+}
+
+function navigateToSlide(e) {
+    const currentDot = navigation.querySelector('.current');
+    const index = getIndexOfNodeElement(navDots, e.target);
+    
+
+
+    const shiftAmount = index*getImageWidth();
+
+    track.style.transform = `translateX(-${shiftAmount}px)`;
+
+    currentDot.classList.remove('current');
+    e.target.classList.add('current');
+    track.querySelector('.current').classList.remove('current');
+    slides[index].classList.add('current');
+}
+
+
+
+
+function setCurrentDot(currentImageIndex) {
+    navigation.querySelector('.current').classList.remove('current')
+    navDots[currentImageIndex].classList.add('current');
+}
 
 
 // image widths change as window is resized, so this value needs to be updated
