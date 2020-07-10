@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Image Carousel</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="./styles.css">
+    </head>
+    <body>
+       <div id="carousel_container">
+
+            <button class="carousel-button" id = "next-button" >
+                <img src="./images/next.svg" alt="">
+            </button>
+           <div id="carousel-track_container">
+                <ul id="carousel-track">
+                    <li class="carousel-slide current">
+                        <img class='carousel-image' src="./images/image-1.jpg" alt="">
+                    </li>
+                    <li class="carousel-slide">
+                        <img class='carousel-image' src="./images/image-2.jpg" alt="">
+                    </li>
+                    <li class="carousel-slide">
+                        <img class='carousel-image' src="./images/image-3.jpg" alt="">
+                    </li>
+                </ul>
+           </div>
+
+           <button class="carousel-button" id = "previous-button">
+               <img src="./images/previous.svg" alt="">
+           </button>
+
+           <div class="carousel-navigation">
+               <button class="carousel-nav-button current"></button>
+               <button class="carousel-nav-button"></button>
+               <button class="carousel-nav-button"></button>
+           </div>
+       </div>
+    
+
+    </body>
+
+    <script src="./script.js"></script>
+</html>
